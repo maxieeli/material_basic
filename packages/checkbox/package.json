@@ -13,7 +13,7 @@
     "es"
   ],
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/checkbox.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"

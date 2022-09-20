@@ -27,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"
+  },
+  "dependencies": {
+    "rc-trigger": "^5.3.1"
   }
 }

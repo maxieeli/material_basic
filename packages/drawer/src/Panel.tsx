@@ -1,7 +1,4 @@
-import type {
-  CSSProperties, ReactNode,
-  Ref,
-} from 'react'
+import type { CSSProperties, ReactNode, Ref } from 'react'
 import classNames from 'classnames'
 
 export interface DrawerPanelRef {

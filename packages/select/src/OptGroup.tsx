@@ -1,18 +1,15 @@
-/* istanbul ignore file */
-import type * as React from 'react';
-import type { DefaultOptionType } from './Select';
+import type { FC, ReactNode } from 'react'
+import type { DefaultOptionType } from './Select'
 
 export interface OptGroupProps extends Omit<DefaultOptionType, 'options'> {
-  children?: React.ReactNode;
+  children?: ReactNode
 }
 
-export interface OptionGroupFC extends React.FC<OptGroupProps> {
-  /** Legacy for check if is a Option Group */
-  isSelectOptGroup: boolean;
+export interface OptionGroupFC extends FC<OptGroupProps> {
+  isSelectOptGroup: boolean
 }
 
-/** This is a placeholder, not real render in dom */
-const OptGroup: OptionGroupFC = () => null;
-OptGroup.isSelectOptGroup = true;
+const OptGroup: OptionGroupFC = () => null
+OptGroup.isSelectOptGroup = true
 
-export default OptGroup;
+export default OptGroup

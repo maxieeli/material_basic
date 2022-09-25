@@ -1,21 +1,18 @@
-/* istanbul ignore file */
-import type * as React from 'react';
-import type { DefaultOptionType } from './Select';
+import type { ReactNode, FC } from 'react'
+import type { DefaultOptionType } from './Select'
 
 export interface OptionProps extends Omit<DefaultOptionType, 'label'> {
-  children: React.ReactNode;
+  children: ReactNode
 
   /** Save for customize data */
-  [prop: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  [prop: string]: any
 }
 
-export interface OptionFC extends React.FC<OptionProps> {
-  /** Legacy for check if is a Option Group */
-  isSelectOption: boolean;
+export interface OptionFC extends FC<OptionProps> {
+  isSelectOption: boolean
 }
 
-/** This is a placeholder, not real render in dom */
-const Option: OptionFC = () => null;
-Option.isSelectOption = true;
+const Option: OptionFC = () => null
+Option.isSelectOption = true
 
-export default Option;
+export default Option

@@ -1,38 +1,45 @@
-import * as React from 'react';
-import { useEffect } from 'react';
-import type { ScrollConfig } from 'rc-virtual-list/lib/List';
-import KeyCode from 'rc-util/lib/KeyCode';
-import omit from 'rc-util/lib/omit';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import useMemo from 'rc-util/lib/hooks/useMemo';
-import classNames from 'classnames';
-import type { ListRef } from 'rc-virtual-list';
-import List from 'rc-virtual-list';
-import TransBtn from './TransBtn';
-import { isPlatformMac } from './utils/platformUtil';
-import useBaseProps from './hooks/useBaseProps';
-import SelectContext from './SelectContext';
-import type { BaseOptionType, RawValueType } from './Select';
-import type { FlattenOptionData } from './interface';
+import type {
+  KeyboardEventHandler, ForwardRefRenderFunction,
+  MouseEventHandler,
+} from 'react'
+import {
+  useEffect, useContext,
+  useRef, useState,
+  useCallback, useImperativeHandle,
+  forwardRef, isValidElement,
+} from 'react'
+import type { ScrollConfig } from 'rc-virtual-list/lib/List'
+import KeyCode from 'rc-util/lib/KeyCode'
+import omit from 'rc-util/lib/omit'
+import pickAttrs from 'rc-util/lib/pickAttrs'
+import useMemo from 'rc-util/lib/hooks/useMemo'
+import classNames from 'classnames'
+import type { ListRef } from 'rc-virtual-list'
+import List from 'rc-virtual-list'
+import TransBtn from './TransBtn'
+import useBaseProps from './hooks/useBaseProps'
+import SelectContext from './SelectContext'
+import type { BaseOptionType, RawValueType } from './Select'
+import type { FlattenOptionData } from './interface'
 
 // export interface OptionListProps<OptionsType extends object[]> {
-export type OptionListProps = Record<string, never>;
+export type OptionListProps = Record<string, never>
 
 export interface RefOptionListProps {
-  onKeyDown: React.KeyboardEventHandler;
-  onKeyUp: React.KeyboardEventHandler;
-  scrollTo?: (args: number | ScrollConfig) => void;
+  onKeyDown: KeyboardEventHandler
+  onKeyUp: KeyboardEventHandler
+  scrollTo?: (args: number | ScrollConfig) => void
 }
 
 function isTitleType(content: any) {
-  return typeof content === 'string' || typeof content === 'number';
+  return typeof content === 'string' || typeof content === 'number'
 }
 
 /**
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListProps> = (
+const OptionList: ForwardRefRenderFunction<RefOptionListProps, OptionListProps> = (
   _,
   ref,
 ) => {
@@ -46,7 +53,7 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
     toggleOpen,
     notFoundContent,
     onPopupScroll,
-  } = useBaseProps();
+  } = useBaseProps()
   const {
     flattenOptions,
     onActiveValue,
@@ -58,70 +65,69 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
     virtual,
     listHeight,
     listItemHeight,
-  } = React.useContext(SelectContext);
+  } = useContext(SelectContext)
 
-  const itemPrefixCls = `${prefixCls}-item`;
+  const itemPrefixCls = `${prefixCls}-item`
 
   const memoFlattenOptions = useMemo(
     () => flattenOptions,
     [open, flattenOptions],
     (prev, next) => next[0] && prev[1] !== next[1],
-  );
+  )
 
   // =========================== List ===========================
-  const listRef = React.useRef<ListRef>(null);
+  const listRef = useRef<ListRef>(null)
 
-  const onListMouseDown: React.MouseEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-  };
+  const onListMouseDown: MouseEventHandler<HTMLDivElement> = (event) => {
+    event.preventDefault()
+  }
 
   const scrollIntoView = (args: number | ScrollConfig) => {
     if (listRef.current) {
-      listRef.current.scrollTo(typeof args === 'number' ? { index: args } : args);
+      listRef.current.scrollTo(typeof args === 'number' ? { index: args } : args)
     }
-  };
+  }
 
   // ========================== Active ==========================
   const getEnabledActiveIndex = (index: number, offset: number = 1): number => {
-    const len = memoFlattenOptions.length;
+    const len = memoFlattenOptions.length
 
     for (let i = 0; i < len; i += 1) {
-      const current = (index + i * offset + len) % len;
+      const current = (index + i * offset + len) % len
 
-      const { group, data } = memoFlattenOptions[current];
+      const { group, data } = memoFlattenOptions[current]
       if (!group && !data.disabled) {
-        return current;
+        return current
       }
     }
 
-    return -1;
-  };
+    return -1
+  }
 
-  const [activeIndex, setActiveIndex] = React.useState(() => getEnabledActiveIndex(0));
+  const [activeIndex, setActiveIndex] = useState(() => getEnabledActiveIndex(0))
   const setActive = (index: number, fromKeyboard = false) => {
-    setActiveIndex(index);
+    setActiveIndex(index)
 
-    const info = { source: fromKeyboard ? ('keyboard' as const) : ('mouse' as const) };
+    const info = { source: fromKeyboard ? ('keyboard' as const) : ('mouse' as const) }
 
     // Trigger active event
-    const flattenItem = memoFlattenOptions[index];
+    const flattenItem = memoFlattenOptions[index]
     if (!flattenItem) {
-      onActiveValue(null, -1, info);
-      return;
+      onActiveValue(null, -1, info)
+      return
     }
-    onActiveValue(flattenItem.value, index, info);
-  };
+    onActiveValue(flattenItem.value, index, info)
+  }
 
   // Auto active first item when list length or searchValue changed
   useEffect(() => {
-    setActive(defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
-  }, [memoFlattenOptions.length, searchValue]);
+    setActive(defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1)
+  }, [memoFlattenOptions.length, searchValue])
 
-  // https://github.com/ant-design/ant-design/issues/34975
-  const isSelected = React.useCallback(
+  const isSelected = useCallback(
     (value: RawValueType) => rawValues.has(value) && mode !== 'combobox',
     [mode, [...rawValues].toString()],
-  );
+  )
 
   // Auto scroll to item position in single mode
   useEffect(() => {
@@ -132,90 +138,90 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
      */
     const timeoutId = setTimeout(() => {
       if (!multiple && open && rawValues.size === 1) {
-        const value: RawValueType = Array.from(rawValues)[0];
-        const index = memoFlattenOptions.findIndex(({ data }) => data.value === value);
+        const value: RawValueType = Array.from(rawValues)[0]
+        const index = memoFlattenOptions.findIndex(({ data }) => data.value === value)
 
         if (index !== -1) {
-          setActive(index);
-          scrollIntoView(index);
+          setActive(index)
+          scrollIntoView(index)
         }
       }
-    });
+    })
 
     // Force trigger scrollbar visible when open
     if (open) {
-      listRef.current?.scrollTo(undefined);
+      listRef.current?.scrollTo(undefined)
     }
 
-    return () => clearTimeout(timeoutId);
-  }, [open, searchValue]);
+    return () => clearTimeout(timeoutId)
+  }, [open, searchValue])
 
   // ========================== Values ==========================
   const onSelectValue = (value: RawValueType) => {
     if (value !== undefined) {
-      onSelect(value, { selected: !rawValues.has(value) });
+      onSelect(value, { selected: !rawValues.has(value) })
     }
 
     // Single mode should always close by select
     if (!multiple) {
-      toggleOpen(false);
+      toggleOpen(false)
     }
-  };
+  }
 
   // ========================= Keyboard =========================
-  React.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     onKeyDown: (event) => {
-      const { which, ctrlKey } = event;
+      const { which, ctrlKey } = event
       switch (which) {
         // >>> Arrow keys & ctrl + n/p on Mac
         case KeyCode.N:
         case KeyCode.P:
         case KeyCode.UP:
         case KeyCode.DOWN: {
-          let offset = 0;
+          let offset = 0
           if (which === KeyCode.UP) {
-            offset = -1;
+            offset = -1
           } else if (which === KeyCode.DOWN) {
-            offset = 1;
-          } else if (isPlatformMac() && ctrlKey) {
+            offset = 1
+          } else if (ctrlKey) {
             if (which === KeyCode.N) {
-              offset = 1;
+              offset = 1
             } else if (which === KeyCode.P) {
-              offset = -1;
+              offset = -1
             }
           }
 
           if (offset !== 0) {
-            const nextActiveIndex = getEnabledActiveIndex(activeIndex + offset, offset);
-            scrollIntoView(nextActiveIndex);
-            setActive(nextActiveIndex, true);
+            const nextActiveIndex = getEnabledActiveIndex(activeIndex + offset, offset)
+            scrollIntoView(nextActiveIndex)
+            setActive(nextActiveIndex, true)
           }
 
-          break;
+          break
         }
 
         // >>> Select
         case KeyCode.ENTER: {
           // value
-          const item = memoFlattenOptions[activeIndex];
+          const item = memoFlattenOptions[activeIndex]
           if (item && !item.data.disabled) {
-            onSelectValue(item.value);
+            onSelectValue(item.value)
           } else {
-            onSelectValue(undefined);
+            onSelectValue(undefined)
           }
 
           if (open) {
-            event.preventDefault();
+            event.preventDefault()
           }
 
-          break;
+          break
         }
 
         // >>> Close
         case KeyCode.ESC: {
-          toggleOpen(false);
+          toggleOpen(false)
           if (open) {
-            event.stopPropagation();
+            event.stopPropagation()
           }
         }
       }
@@ -223,9 +229,9 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
     onKeyUp: () => {},
 
     scrollTo: (index) => {
-      scrollIntoView(index);
+      scrollIntoView(index)
     },
-  }));
+  }))
 
   // ========================== Render ==========================
   if (memoFlattenOptions.length === 0) {
@@ -238,22 +244,22 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
       >
         {notFoundContent}
       </div>
-    );
+    )
   }
 
-  const omitFieldNameList = Object.keys(fieldNames).map((key) => fieldNames[key]);
+  const omitFieldNameList = Object.keys(fieldNames).map((key) => fieldNames[key])
 
-  const getLabel = (item: Record<string, any>) => item.label;
+  const getLabel = (item: Record<string, any>) => item.label
 
   const renderItem = (index: number) => {
-    const item = memoFlattenOptions[index];
-    if (!item) return null;
+    const item = memoFlattenOptions[index]
+    if (!item) return null
 
-    const itemData = item.data || {};
-    const { value } = itemData;
-    const { group } = item;
-    const attrs = pickAttrs(itemData, true);
-    const mergedLabel = getLabel(item);
+    const itemData = item.data || {}
+    const { value } = itemData
+    const { group } = item
+    const attrs = pickAttrs(itemData, true)
+    const mergedLabel = getLabel(item)
     return item ? (
       <div
         aria-label={typeof mergedLabel === 'string' && !group ? mergedLabel : null}
@@ -265,8 +271,8 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
       >
         {value}
       </div>
-    ) : null;
-  };
+    ) : null
+  }
 
   return (
     <>
@@ -287,12 +293,12 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
         virtual={virtual}
       >
         {(item, itemIndex) => {
-          const { group, groupOption, data, label, value } = item;
-          const { key } = data;
+          const { group, groupOption, data, label, value } = item
+          const { key } = data
 
           // Group
           if (group) {
-            const groupTitle = data.title ?? (isTitleType(label) ? label.toString() : undefined);
+            const groupTitle = data.title ?? (isTitleType(label) ? label.toString() : undefined)
 
             return (
               <div
@@ -301,34 +307,38 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
               >
                 {label !== undefined ? label : key}
               </div>
-            );
+            )
           }
 
-          const { disabled, title, children, style, className, ...otherProps } = data;
-          const passedProps = omit(otherProps, omitFieldNameList);
+          const { disabled, title, children, style, className, ...otherProps } = data
+          const passedProps = omit(otherProps, omitFieldNameList)
 
           // Option
-          const selected = isSelected(value);
+          const selected = isSelected(value)
 
-          const optionPrefixCls = `${itemPrefixCls}-option`;
+          const optionPrefixCls = `${itemPrefixCls}-option`
           const optionClassName = classNames(itemPrefixCls, optionPrefixCls, className, {
             [`${optionPrefixCls}-grouped`]: groupOption,
             [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
             [`${optionPrefixCls}-disabled`]: disabled,
             [`${optionPrefixCls}-selected`]: selected,
-          });
+          })
 
-          const mergedLabel = getLabel(item);
+          const mergedLabel = getLabel(item)
 
           const iconVisible =
-            !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected;
+            !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected
 
-          // https://github.com/ant-design/ant-design/issues/34145
-          const content = typeof mergedLabel === 'number' ? mergedLabel : mergedLabel || value;
-          // https://github.com/ant-design/ant-design/issues/26717
-          let optionTitle = isTitleType(content) ? content.toString() : undefined;
+          const content = typeof mergedLabel === 'number'
+            ? mergedLabel
+            : mergedLabel || value
+
+          let optionTitle = isTitleType(content)
+            ? content.toString()
+            : undefined
+
           if (title !== undefined) {
-            optionTitle = title;
+            optionTitle = title
           }
 
           return (
@@ -339,19 +349,19 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
               title={optionTitle}
               onMouseMove={() => {
                 if (activeIndex === itemIndex || disabled) {
-                  return;
+                  return
                 }
-                setActive(itemIndex);
+                setActive(itemIndex)
               }}
               onClick={() => {
                 if (!disabled) {
-                  onSelectValue(value);
+                  onSelectValue(value)
                 }
               }}
               style={style}
             >
               <div className={`${optionPrefixCls}-content`}>{content}</div>
-              {React.isValidElement(menuItemSelectedIcon) || selected}
+              {isValidElement(menuItemSelectedIcon) || selected}
               {iconVisible && (
                 <TransBtn
                   className={`${itemPrefixCls}-option-state`}
@@ -362,14 +372,14 @@ const OptionList: React.ForwardRefRenderFunction<RefOptionListProps, OptionListP
                 </TransBtn>
               )}
             </div>
-          );
+          )
         }}
       </List>
     </>
-  );
-};
+  )
+}
 
-const RefOptionList = React.forwardRef(OptionList);
-RefOptionList.displayName = 'OptionList';
+const RefOptionList = forwardRef(OptionList)
+RefOptionList.displayName = 'OptionList'
 
-export default RefOptionList;
+export default RefOptionList

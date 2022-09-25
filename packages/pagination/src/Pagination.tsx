@@ -85,7 +85,6 @@ class Pagination extends Component<PaginationProps, any> {
 
   componentDidUpdate(prevProps: any, prevState: any) {
     const { prefixCls } = this.props
-    //
     if (prevState.current !== this.state.current && this.paginationNode) {
       const lastCurrentNode = this.paginationNode.querySelector(
         `.${prefixCls}-item-${prevState.current}`,

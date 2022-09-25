@@ -23,9 +23,13 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/select.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"
+  },
+  "dependencies": {
+    "rc-overflow": "^1.2.8",
+    "rc-virtual-list": "^3.4.8"
   }
 }

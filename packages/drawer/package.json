@@ -23,9 +23,12 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/drawer.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"
+  },
+  "dependencies": {
+    "rc-motion": "^2.6.2"
   }
 }

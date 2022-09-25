@@ -23,7 +23,7 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/input.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"

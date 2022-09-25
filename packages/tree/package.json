@@ -27,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"
+  },
+  "dependencies": {
+    "rc-virtual-list": "^3.4.8"
   }
 }

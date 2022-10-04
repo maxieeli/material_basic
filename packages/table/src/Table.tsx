@@ -333,8 +333,6 @@ function Table<RecordType extends DefaultRecordType>(props: TableProps<RecordTyp
   if (horizonScroll) {
     scrollXStyle = { overflowX: 'auto' }
     // When no vertical scrollbar, should hide it
-    // https://github.com/ant-design/ant-design/pull/20705
-    // https://github.com/ant-design/ant-design/issues/21879
     if (!fixHeader) {
       scrollYStyle = { overflowY: 'hidden' }
     }
@@ -465,7 +463,6 @@ function Table<RecordType extends DefaultRecordType>(props: TableProps<RecordTyp
     if (tableLayout) {
       return tableLayout
     }
-    // https://github.com/ant-design/ant-design/issues/25227
     // When scroll.x is max-content, no need to fix table layout
     // it's width should stretch out to fit content
     if (fixColumn) {

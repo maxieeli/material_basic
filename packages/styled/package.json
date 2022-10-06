@@ -1,5 +1,5 @@
 {
-  "name": "@developerli/basic-cascader",
+  "name": "@developerli/styled",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "owenli <owenlideveloper@gmail.com>",
@@ -12,9 +12,6 @@
     "dist",
     "es"
   ],
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -29,7 +26,12 @@
     "url": "https://github.com/owenCoderLi/material_basic/issues"
   },
   "dependencies": {
-    "@developerli/basic-select": "^1.0.0",
-    "@developerli/basic-tree": "^1.0.0"
+    "@emotion/hash": "^0.9.0",
+    "@emotion/unitless": "^0.8.0",
+    "csstype": "^3.1.1",
+    "stylis": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/stylis": "^4.0.2"
   }
 }

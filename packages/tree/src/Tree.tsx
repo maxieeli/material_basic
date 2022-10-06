@@ -363,11 +363,6 @@ class Tree<TreeDataType extends DataNode | BasicDataNode = DataNode> extends Rea
         [MOTION_KEY]: MotionEntity,
         ...entitiesMap.keyEntities,
       }
-
-      // Warning if treeNode not provide key
-      if (process.env.NODE_ENV !== 'production') {
-        warningWithoutKey(treeData, fieldNames)
-      }
     }
 
     const keyEntities = newState.keyEntities || prevState.keyEntities

@@ -44,7 +44,7 @@ import pickAttrs from 'rc-util/lib/pickAttrs';
 import classNames from 'classnames';
 import { TreeContext } from "./contextType";
 import { getDragChildrenKeys, parseCheckedKeys, conductExpandParent, calcSelectedKeys, calcDropPosition, arrAdd, arrDel, posToArr } from "./util";
-import { flattenTreeData, convertTreeToData, convertDataToEntities, warningWithoutKey, convertNodePropsToEventData, getTreeNodeProps, fillFieldNames } from "./utils/treeUtil";
+import { flattenTreeData, convertTreeToData, convertDataToEntities, convertNodePropsToEventData, getTreeNodeProps, fillFieldNames } from "./utils/treeUtil";
 import NodeList, { MOTION_KEY, MotionEntity } from "./NodeList";
 import TreeNode from "./TreeNode";
 import { conductCheck } from "./utils/conductUtil";
@@ -1220,11 +1220,7 @@ var Tree = /*#__PURE__*/function (_React$Component) {
         var entitiesMap = convertDataToEntities(treeData, {
           fieldNames: fieldNames
         });
-        newState.keyEntities = _objectSpread(_defineProperty({}, MOTION_KEY, MotionEntity), entitiesMap.keyEntities); // Warning if treeNode not provide key
-
-        if (process.env.NODE_ENV !== 'production') {
-          warningWithoutKey(treeData, fieldNames);
-        }
+        newState.keyEntities = _objectSpread(_defineProperty({}, MOTION_KEY, MotionEntity), entitiesMap.keyEntities);
       }
 
       var keyEntities = newState.keyEntities || prevState.keyEntities; // ================ expandedKeys =================

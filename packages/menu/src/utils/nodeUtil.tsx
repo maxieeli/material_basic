@@ -23,10 +23,6 @@ export function parseChildren(
         eventKey,
       } as any
 
-      if (process.env.NODE_ENV !== 'production' && emptyKey) {
-        cloneProps.warnKey = true
-      }
-
       return React.cloneElement(child, cloneProps)
     }
 

@@ -11,9 +11,9 @@ export const isClient =
   typeof window !== 'undefined' && window.document && window.document.documentElement
 
 /** Is client side and not jsdom */
-export const isBrowserClient = process.env.NODE_ENV !== 'test' && isClient
+export const isBrowserClient = isClient
 
-export function hasValue(value) {
+export function hasValue(value: any) {
   return value !== undefined && value !== null
 }
 

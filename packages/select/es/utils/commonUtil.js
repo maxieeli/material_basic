@@ -10,7 +10,7 @@ export function toArray(value) {
 export var isClient = typeof window !== 'undefined' && window.document && window.document.documentElement;
 /** Is client side and not jsdom */
 
-export var isBrowserClient = process.env.NODE_ENV !== 'test' && isClient;
+export var isBrowserClient = isClient;
 export function hasValue(value) {
   return value !== undefined && value !== null;
 }

@@ -105,11 +105,6 @@ const InternalSubMenu = (props: SubMenuProps) => {
   const elementRef = React.useRef<HTMLDivElement>()
   const popupRef = React.useRef<HTMLUListElement>()
 
-  // ================================ Warn ================================
-  if (process.env.NODE_ENV !== 'production' && warnKey) {
-    warning(false, 'SubMenu should not leave undefined `key`.')
-  }
-
   // ================================ Icon ================================
   const mergedItemIcon = itemIcon || contextItemIcon
   const mergedExpandIcon = expandIcon || contextExpandIcon

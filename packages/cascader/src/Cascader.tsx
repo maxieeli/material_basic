@@ -10,11 +10,11 @@ import type {
 import type {
   BaseSelectProps, BaseSelectPropsWithoutPrivate,
   BaseSelectRef,
-} from '@owen-basic/select'
-import { BaseSelect } from '@owen-basic/select'
-import type { DisplayValueType, Placement } from '@owen-basic/select/es/BaseSelect'
-import useId from '@owen-basic/select/es/hooks/useId'
-import { conductCheck } from '@owen-basic/tree/es/utils/conductUtil'
+} from 'developerli/select'
+import { BaseSelect } from 'developerli/select'
+import type { DisplayValueType, Placement } from 'developerli/select/es/BaseSelect'
+import useId from 'developerli/select/es/hooks/useId'
+import { conductCheck } from 'developerli/tree/es/utils/conductUtil'
 import useMergedState from 'rc-util/lib/hooks/useMergedState'
 import CascaderContext from './context'
 import useDisplayValues from './hooks/useDisplayValues'

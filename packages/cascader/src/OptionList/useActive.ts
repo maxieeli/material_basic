@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import type { Key } from 'react'
-import { useBaseProps } from '@owen-basic/select'
+import { useBaseProps } from 'developerli/select'
 import CascaderContext from '../context'
 
 /**

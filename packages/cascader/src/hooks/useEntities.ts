@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react'
-import { convertDataToEntities } from '@owen-basic/tree/es/utils/treeUtil'
-import type { DataEntity } from '@owen-basic/tree/es/interface'
+import { convertDataToEntities } from 'developerli/tree/es/utils/treeUtil'
+import type { DataEntity } from 'developerli/tree/es/interface'
 import type { DefaultOptionType, InternalFieldNames } from '../Cascader'
 import { VALUE_SPLIT } from '../utils/commonUtil'
 

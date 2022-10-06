@@ -5,7 +5,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import { useRef, useCallback } from 'react';
-import { convertDataToEntities } from '@owen-basic/tree/es/utils/treeUtil';
+import { convertDataToEntities } from 'developerli/tree/es/utils/treeUtil';
 import { VALUE_SPLIT } from "../utils/commonUtil";
 
 /** Lazy parse options data into conduct-able info to avoid perf issue in single mode */

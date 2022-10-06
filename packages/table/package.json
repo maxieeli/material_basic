@@ -1,5 +1,5 @@
 {
-  "name": "@owen-basic/table",
+  "name": "@developerli/basic-table",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "owenli <owenlideveloper@gmail.com>",
@@ -23,9 +23,13 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/table.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"
+  },
+  "dependencies": {
+    "@types/shallowequal": "^1.1.1",
+    "shallowequal": "^1.1.0"
   }
 }

@@ -5,6 +5,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "remove:node": "cross-env && node ./scripts/remove_module"
+  },
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.18.9",

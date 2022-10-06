@@ -31,9 +31,9 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import { forwardRef, useMemo, useCallback } from 'react';
-import { BaseSelect } from '@owen-basic/select';
-import useId from '@owen-basic/select/es/hooks/useId';
-import { conductCheck } from '@owen-basic/tree/es/utils/conductUtil';
+import { BaseSelect } from 'developerli/select';
+import useId from 'developerli/select/es/hooks/useId';
+import { conductCheck } from 'developerli/tree/es/utils/conductUtil';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import CascaderContext from "./context";
 import useDisplayValues from "./hooks/useDisplayValues";

@@ -26,7 +26,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { forwardRef, useRef, useContext, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
-import { useBaseProps } from '@owen-basic/select';
+import { useBaseProps } from 'developerli/select';
 import CascaderContext from "../context";
 import { isLeaf, scrollIntoParentView, toPathKey, toPathKeys, toPathValueStr } from "../utils/commonUtil";
 import { toPathOptions } from "../utils/treeUtil";

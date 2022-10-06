@@ -1,5 +1,5 @@
 {
-  "name": "@owen-basic/menu",
+  "name": "@developerli/menu",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "owenli <owenlideveloper@gmail.com>",
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/owenCoderLi/material_basic.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@owen/menu.test.js"
+    "build": "cross-env father build"
   },
   "bugs": {
     "url": "https://github.com/owenCoderLi/material_basic/issues"

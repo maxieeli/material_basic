@@ -1,4 +1,4 @@
-import type { DataEntity } from '@owen-basic/tree/es/interface';
+import type { DataEntity } from 'developerli/tree/es/interface';
 import type { DefaultOptionType, InternalFieldNames } from '../Cascader';
 export interface OptionsInfo {
     keyEntities: Record<string, DataEntity>;

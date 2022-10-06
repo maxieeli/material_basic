@@ -89,6 +89,7 @@ export type RangePickerSharedProps<DateType> = {
     string,
     Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)
   >
+  label?: string | React.ReactNode
   separator?: React.ReactNode
   allowEmpty?: [boolean, boolean]
   mode?: [PanelMode, PanelMode]
@@ -171,6 +172,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
     id,
     style,
     className,
+    label,
     popupStyle,
     dropdownClassName,
     transitionName,
@@ -402,13 +404,8 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
       if (
         // WeekPicker only compare week
         (picker === 'week' && !isSameWeek(generateConfig, locale.locale, startValue, endValue)) ||
-        // QuotaPicker only compare week
-        (picker === 'quarter' && !isSameQuarter(generateConfig, startValue, endValue)) ||
         // Other non-TimePicker compare date
-        (picker !== 'week' &&
-          picker !== 'quarter' &&
-          picker !== 'time' &&
-          !isSameDate(generateConfig, startValue, endValue))
+        (picker !== 'week' && picker !== 'time' && !isSameDate(generateConfig, startValue, endValue))
       ) {
         // Clean up end date when start date is after end date
         if (sourceIndex === 0) {
@@ -1080,6 +1077,8 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
           className={classNames(prefixCls, `${prefixCls}-range`, className, {
             [`${prefixCls}-disabled`]: mergedDisabled[0] && mergedDisabled[1],
             [`${prefixCls}-focused`]: mergedActivePickerIndex === 0 ? startFocused : endFocused,
+            [`${prefixCls}-shrink`]: label && (startFocused || endFocused || startText || endText),
+            [`${prefixCls}-has-label`]: label,
           })}
           style={style}
           onClick={onPickerClick}

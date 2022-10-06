@@ -5,8 +5,8 @@ import {
 } from 'react'
 import type { ReactElement, Key } from 'react'
 import classNames from 'classnames'
-import { useBaseProps } from '@owen-basic/select'
-import type { RefOptionListProps } from '@owen-basic/select/es/OptionList'
+import { useBaseProps } from 'developerli/select'
+import type { RefOptionListProps } from 'developerli/select/es/OptionList'
 import type { DefaultOptionType, SingleValueType } from '../Cascader'
 import CascaderContext from '../context'
 import {

@@ -19,7 +19,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { useMemo, useImperativeHandle } from 'react';
-import { useBaseProps } from '@owen-basic/select';
+import { useBaseProps } from 'developerli/select';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { SEARCH_MARK } from "../hooks/useSearchOptions";
 export default (function (ref, options, fieldNames, activeValueCells, setActiveValueCells, onKeyBoardSelect) {

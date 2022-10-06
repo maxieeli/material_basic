@@ -39,7 +39,7 @@ export type Locale = {
   shortMonths?: string[]
 }
 
-export type PanelMode = 'time' | 'date' | 'week' | 'month' | 'quarter' | 'year' | 'decade'
+export type PanelMode = 'time' | 'date' | 'week' | 'month' | 'year' | 'decade'
 
 export type PickerMode = Exclude<PanelMode, 'datetime' | 'decade'>
 
@@ -58,7 +58,6 @@ export type PanelSharedProps<DateType> = {
   generateConfig: GenerateConfig<DateType>
   value?: NullableDateType<DateType>
   viewDate: DateType
-  /** [Legacy] Set default display picker view date */
   defaultPickerValue?: DateType
   locale: Locale
   disabledDate?: (date: DateType) => boolean

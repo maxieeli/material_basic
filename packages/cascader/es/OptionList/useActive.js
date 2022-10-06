@@ -11,7 +11,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 import { useState, useContext, useEffect } from 'react';
-import { useBaseProps } from '@owen-basic/select';
+import { useBaseProps } from 'developerli/select';
 import CascaderContext from "../context";
 /**
  * Control the active open options path.

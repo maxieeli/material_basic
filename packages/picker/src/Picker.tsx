@@ -37,6 +37,7 @@ export type PickerSharedProps<DateType> = {
   tabIndex?: number
   open?: boolean
   defaultOpen?: boolean
+  label?: string | React.ReactNode
   /** Make input readOnly to avoid popup keyboard in mobile */
   inputReadOnly?: boolean
   id?: string
@@ -160,6 +161,7 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
     onSelect,
     autoComplete = 'off',
     inputRender,
+    label,
   } = props as MergedPickerProps<DateType>
 
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -489,6 +491,8 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
           className={classNames(prefixCls, className, {
             [`${prefixCls}-disabled`]: disabled,
             [`${prefixCls}-focused`]: focused,
+            [`${prefixCls}-shrink`]: label && (focused || text),
+            [`${prefixCls}-has-label`]: label,
           })}
           style={style}
           onMouseDown={onMouseDown}

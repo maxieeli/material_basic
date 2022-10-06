@@ -1,5 +1,5 @@
-import * as React from 'react';
-import type { PanelMode } from '../interface';
+import * as React from 'react'
+import type { PanelMode } from '../interface'
 
 export default function getExtraFooter(
   prefixCls: string,
@@ -7,10 +7,10 @@ export default function getExtraFooter(
   renderExtraFooter?: (mode: PanelMode) => React.ReactNode,
 ) {
   if (!renderExtraFooter) {
-    return null;
+    return null
   }
 
   return (
     <div className={`${prefixCls}-footer-extra`}>{renderExtraFooter(mode)}</div>
-  );
+  )
 }

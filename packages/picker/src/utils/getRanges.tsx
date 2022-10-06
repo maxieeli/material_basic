@@ -1,17 +1,17 @@
-import * as React from 'react';
-import type { Components, RangeList, Locale } from '../interface';
+import * as React from 'react'
+import type { Components, RangeList, Locale } from '../interface'
 
 export type RangesProps = {
-  prefixCls: string;
-  rangeList?: RangeList;
-  components?: Components;
-  needConfirmButton: boolean;
-  onNow?: null | (() => void) | false;
-  onOk?: null | (() => void) | false;
-  okDisabled?: boolean;
-  showNow?: boolean;
-  locale: Locale;
-};
+  prefixCls: string
+  rangeList?: RangeList
+  components?: Components
+  needConfirmButton: boolean
+  onNow?: null | (() => void) | false
+  onOk?: null | (() => void) | false
+  okDisabled?: boolean
+  showNow?: boolean
+  locale: Locale
+}
 
 export default function getRanges({
   prefixCls,
@@ -24,11 +24,11 @@ export default function getRanges({
   showNow,
   locale,
 }: RangesProps) {
-  let presetNode: React.ReactNode;
-  let okNode: React.ReactNode;
+  let presetNode: React.ReactNode
+  let okNode: React.ReactNode
 
   if (rangeList.length) {
-    const Item = (components.rangeItem || 'span') as any;
+    const Item = (components.rangeItem || 'span') as any
 
     presetNode = (
       <>
@@ -40,11 +40,11 @@ export default function getRanges({
           </li>
         ))}
       </>
-    );
+    )
   }
 
   if (needConfirmButton) {
-    const Button = (components.button || 'button') as any;
+    const Button = (components.button || 'button') as any
 
     if (onNow && !presetNode && showNow !== false) {
       presetNode = (
@@ -53,7 +53,7 @@ export default function getRanges({
             {locale.now}
           </a>
         </li>
-      );
+      )
     }
 
     okNode = needConfirmButton && (
@@ -62,11 +62,11 @@ export default function getRanges({
           {locale.ok}
         </Button>
       </li>
-    );
+    )
   }
 
   if (!presetNode && !okNode) {
-    return null;
+    return null
   }
 
   return (
@@ -74,5 +74,5 @@ export default function getRanges({
       {presetNode}
       {okNode}
     </ul>
-  );
+  )
 }

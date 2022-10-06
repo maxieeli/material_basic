@@ -1,6 +1,6 @@
 import type { ReactNode, ReactElement, CSSProperties, Ref, PropsWithChildren } from 'react';
-import type { BaseSelectPropsWithoutPrivate, BaseSelectRef } from '@owen-basic/select';
-import type { Placement } from '@owen-basic/select/es/BaseSelect';
+import type { BaseSelectPropsWithoutPrivate, BaseSelectRef } from 'developerli/select';
+import type { Placement } from 'developerli/select/es/BaseSelect';
 import { SHOW_CHILD, SHOW_PARENT } from './utils/commonUtil';
 export interface ShowSearchType<OptionType extends BaseOptionType = DefaultOptionType> {
     filter?: (inputValue: string, options: OptionType[], fieldNames: FieldNames) => boolean;

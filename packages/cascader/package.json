@@ -1,6 +1,6 @@
 {
   "name": "@developerli/basic-cascader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> TODO: description",
   "author": "owenli <owenlideveloper@gmail.com>",
   "homepage": "https://github.com/owenCoderLi/material_basic#readme",
@@ -29,7 +29,7 @@
     "url": "https://github.com/owenCoderLi/material_basic/issues"
   },
   "dependencies": {
-    "@developerli/basic-select": "^1.0.0",
-    "@developerli/basic-tree": "^1.0.0"
+    "@developerli/basic-select": "^1.0.1",
+    "@developerli/basic-tree": "^1.0.1"
   }
 }

@@ -42,7 +42,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { Fragment as _Fragment } from "react/jsx-runtime";
 import { jsxs as _jsxs } from "react/jsx-runtime";
 var Input = /*#__PURE__*/forwardRef(function (props, ref) {
-  var _classNames3;
+  var _classNames3, _classNames4;
 
   var autoComplete = props.autoComplete,
       onChange = props.onChange,
@@ -192,7 +192,7 @@ var Input = /*#__PURE__*/forwardRef(function (props, ref) {
   return /*#__PURE__*/_jsxs("div", {
     className: classNames("".concat(prefixCls, "-text-outlined"), (_classNames3 = {}, _defineProperty(_classNames3, "".concat(prefixCls, "-has-label"), label), _defineProperty(_classNames3, "".concat(prefixCls, "-focused"), focused), _defineProperty(_classNames3, "".concat(prefixCls, "-shrink"), label && (focused || value)), _classNames3)),
     children: [label && /*#__PURE__*/_jsx("label", {
-      className: "".concat(prefixCls, "-label"),
+      className: classNames("".concat(prefixCls, "-label"), (_classNames4 = {}, _defineProperty(_classNames4, "".concat(prefixCls, "-label-error"), props.affixWrapperClassName.includes('error') || props.groupClassName.includes('error')), _defineProperty(_classNames4, "".concat(prefixCls, "-label-warning"), props.affixWrapperClassName.includes('warning') || props.groupClassName.includes('warning')), _classNames4)),
       children: label
     }), /*#__PURE__*/_jsx(BaseInput, _objectSpread(_objectSpread({}, rest), {}, {
       prefixCls: prefixCls,

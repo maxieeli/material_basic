@@ -193,7 +193,15 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
       )
     }>
       {label && (
-        <label className={`${prefixCls}-label`}>{label}</label>
+        <label className={classNames(
+          `${prefixCls}-label`,
+          {
+            [`${prefixCls}-label-error`]: props.affixWrapperClassName.includes('error') || props.groupClassName.includes('error'),
+            [`${prefixCls}-label-warning`]: props.affixWrapperClassName.includes('warning') || props.groupClassName.includes('warning'),
+          }
+        )}>
+          {label}
+        </label>
       )}
       <BaseInput
         {...rest}
